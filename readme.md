@@ -1,0 +1,1 @@
+Algo to cap values and redistribute the remainder to the rest proportionatelly according to each weight
