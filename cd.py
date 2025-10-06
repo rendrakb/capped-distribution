@@ -1,6 +1,6 @@
 from pprint import pprint
 
-def cap_and_redistribute(weights, cap=0.09):
+def cap_and_distribute(weights, cap=0.09):
     import numpy as np
     weights = np.array(weights, dtype=float)
     total = weights.sum()
@@ -24,8 +24,8 @@ def cap_and_redistribute(weights, cap=0.09):
         if not remaining:
             break
         total_remaining = sum(wt for _, wt in remaining)
-        redistributed = [(j, wt + excess * (wt / total_remaining)) for j, wt in remaining]
-        indexed = indexed[:i+1] + redistributed
+        distributed = [(j, wt + excess * (wt / total_remaining)) for j, wt in remaining]
+        indexed = indexed[:i+1] + distributed
         indexed[i+1:] = sorted(indexed[i+1:], key=lambda x: x[1], reverse=True)
         i += 1
 
@@ -61,6 +61,6 @@ weights = [ #example
 total = sum(weights)
 weights = [w/total for w in weights]
 
-capped_weights = cap_and_redistribute(weights, cap=0.09)
+capped_weights = cap_and_distribute(weights, cap=0.09)
 
 pprint([round(w, 4) for w in capped_weights])
